@@ -1,0 +1,18 @@
+version: "3.3"
+
+services:
+    frontend-app: 
+        container_name: frontend-app
+        volumes:
+          - ./frontend:/usr/src/app
+    
+    live-reloader:
+        image: apogiatzis/livereloading
+        container_name: livereloader
+        privileged: true
+        environment:
+          - RELOAD_DELAY=1.5              # seconds
+          - RELOAD_CONTAINER=frontend-app
+        volumes:
+          - "/var/run/docker.sock:/var/run/docker.sock"
+          - ./frontend:/usr/src/app
